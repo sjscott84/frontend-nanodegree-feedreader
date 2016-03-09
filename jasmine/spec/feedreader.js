@@ -1,4 +1,4 @@
-
+'use strict';
 /*
  * We're placing all of our tests within the $() function,
  * since some of these tests may require DOM elements. We want
@@ -23,16 +23,16 @@ $(function() {
          * Loops though all objects in allFeeds array and ensures it has a URL defined
          * and that the URL is not empty.
          */
-         function checkForValidURL(url){
+        function checkForValidURL(url){
             it('Should contain a valid URL', function () {
                 expect(url).toBeDefined();
-                expect(url).not.toBeNull();
-            })
-         };
+                expect(url.length).toBeGreaterThan(0);
+            });
+        }
 
-         for (var i = 0; i < allFeeds.length; i++){
+        for (var i = 0; i < allFeeds.length; i++){
             checkForValidURL(allFeeds[i].url);
-         };
+        }
 
         /*
          * Loops though all objects in allFeeds array and ensures it has a name defined
@@ -41,27 +41,26 @@ $(function() {
         function checkForValidName(name){
             it('Should contain a valid Name', function () {
                 expect(name).toBeDefined();
-                expect(name).not.toBeNull();
-            })
-         };
+                expect(name.length).toBeGreaterThan(0);
+            });
+        }
 
-         for (var i = 0; i < allFeeds.length; i++){
+        for (var i = 0; i < allFeeds.length; i++){
             checkForValidName(allFeeds[i].name);
-         };
+        }
     });
 
     /*
      * This test suite relates to the menu option of the application
      */
     describe('The menu', function(){
-        var body = document.body,
-            className = className;
+        var body = $('body');
 
         /*
          * Test to ensure the menu element is hidden by default. You'll have to analyze the HTML and
          */
         it('Menu hidden by default', function(){
-            expect(body.className).toBe('menu-hidden');
+            expect(body.hasClass('menu-hidden')).toEqual(true);
         });
 
          /*
@@ -71,14 +70,14 @@ $(function() {
 
             it('opens menu when clicked', function(){
                 $('a.menu-icon-link').trigger('click');
-                expect(body.className).not.toBe('menu-hidden');
-            })
+                expect(body.hasClass('menu-hidden')).toEqual(false);
+            });
 
             it('closes menu when clicked again', function(){
                 $('a.menu-icon-link').trigger('click');
-                expect(body.className).toBe('menu-hidden');
+                expect(body.hasClass('menu-hidden')).toEqual(true);
             });
-
+            
         });
 
     });
@@ -89,9 +88,7 @@ $(function() {
     describe('Initial Entries', function(){
 
         beforeEach(function(done){
-            loadFeed(0, function(){
-                done();
-            });
+            loadFeed(0, done);
         });
 
         /*
@@ -99,7 +96,7 @@ $(function() {
          * a single .entry element within the .feed container.
          */
         it('should have at least single entry element within the feed container', function(){
-            expect($('.feed').find('.entry')).not.toBeNull();
+            expect($('.feed .entry')).not.toBeNull();
         });
 
     });
@@ -111,9 +108,9 @@ $(function() {
         var oldFeed;
 
         beforeEach(function(done){
-            oldFeed = $('.feed').html();
             loadFeed(0, function(){
-                done();
+                oldFeed = $('.feed').html();
+                loadFeed(1, done);
             });
         });
 
@@ -122,7 +119,6 @@ $(function() {
          * that the content actually changes.
          */
         it('content should change when new feed is loaded', function(){
-            loadFeed(1);
             expect($('.feed').html()).not.toMatch(oldFeed);
         });
     });
@@ -138,7 +134,7 @@ $(function() {
          * Test to ensure the allFeeds array actually increases when addNewFeed function is run
          * and ensures the name and url is defined and not empty
          */
-        it('should add a new object to allFeeds array', function(){
+        xit('should add a new object to allFeeds array', function(){
             addNewFeed('fake name', 'fake url');
             expect(allFeeds.length).toBeGreaterThan(originalFeedLength);
 
