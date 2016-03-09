@@ -77,7 +77,7 @@ $(function() {
                 $('a.menu-icon-link').trigger('click');
                 expect(body.hasClass('menu-hidden')).toEqual(true);
             });
-            
+
         });
 
     });
@@ -119,7 +119,7 @@ $(function() {
          * that the content actually changes.
          */
         it('content should change when new feed is loaded', function(){
-            expect($('.feed').html()).not.toMatch(oldFeed);
+            expect($('.feed').html()).not.toBe(oldFeed);
         });
     });
 
