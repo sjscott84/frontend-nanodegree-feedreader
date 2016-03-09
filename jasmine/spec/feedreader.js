@@ -1,18 +1,14 @@
-/* feedreader.js
- *
- * This is the spec file that Jasmine will read and contains
- * all of the tests that will be run against your application.
- */
 
-/* We're placing all of our tests within the $() function,
+/*
+ * We're placing all of our tests within the $() function,
  * since some of these tests may require DOM elements. We want
  * to ensure they don't run until the DOM is ready.
  */
 $(function() {
-    /* This is our first test suite - a test suite just contains
-    * a related set of tests. This suite is all about the RSS
-    * feeds definitions, the allFeeds variable in our application.
-    */
+    /*
+     * This test suite is all about the RSS
+     * feeds definitions, the allFeeds variable in our application.
+     */
     describe('RSS Feeds', function() {
         /*
          * Tests to make sure that the allFeeds variable has been defined and that it is not
@@ -107,6 +103,7 @@ $(function() {
         });
 
     });
+
     /*
      * This test suite relates to when a new feed is loaded in the application
      */
