@@ -15,7 +15,7 @@ $(function() {
     */
     describe('RSS Feeds', function() {
         /*
-         * Tests to make sure that theallFeeds variable has been defined and that it is not
+         * Tests to make sure that the allFeeds variable has been defined and that it is not
          * empty. 
          */
         it('are defined', function() {
@@ -54,6 +54,9 @@ $(function() {
          };
     });
 
+    /*
+     * This test suite relates to the menu option of the application
+     */
     describe('The menu', function(){
         var body = document.body,
             className = className;
@@ -84,11 +87,14 @@ $(function() {
 
     });
 
+    /*
+     * This test suite relates to the default view of the application on open
+     */
     describe('Initial Entries', function(){
 
         beforeEach(function(done){
             loadFeed(0, function(){
-            done();
+                done();
             });
         });
 
@@ -101,7 +107,9 @@ $(function() {
         });
 
     });
-
+    /*
+     * This test suite relates to when a new feed is loaded in the application
+     */
     describe('New Feed Selection', function(){
         var oldFeed;
 
@@ -122,6 +130,28 @@ $(function() {
         });
     });
 
-    /* TODO: Write a new test suite for some future enhancements*/
+    /* 
+     * This test suite relates to adding a new feed to the allFeeds array by user
+     * (for future implementation, addNewFeed function has not been built)
+     */
+    describe('Add new feed', function(){
+        var originalFeedLength = allFeeds.length;
+
+        /*
+         * Test to ensure the allFeeds array actually increases when addNewFeed function is run
+         * and ensures the name and url is defined and not empty
+         */
+        it('should add a new object to allFeeds array', function(){
+            addNewFeed('fake name', 'fake url');
+            expect(allFeeds.length).toBeGreaterThan(originalFeedLength);
+
+            var newFeed = allFeeds.pop();
+
+            expect(newFeed.name).toBeDefined();
+            expect(newFeed.name).not.toBeNull();
+            expect(newFeed.url).toBeDefined();
+            expect(newFeed.url).not.toBeNull();
+        });
+    });
 
 }());
