@@ -9,7 +9,3 @@ I have added a test for a future function that would allow a user to add new fee
 ## To Run Application Locally
 
 Clone this github project locally, open index.html and project will run.
-
-## Technical
-
-Technical details for this site can be found at https://github.com/sjscott84/frontend-nanodegree-feedreader/out
